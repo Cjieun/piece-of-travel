@@ -8,7 +8,9 @@ export default function useFont() {
   useEffect(() => {
     async function loadFonts() {
       await Font.loadAsync({
-        Pretendard: require('../assets/fonts/Pretendard-Regular.ttf'),
+        'Pretendard-Regular': require('../assets/fonts/Pretendard-Regular.ttf'),
+        'Pretendard-Medium': require('../assets/fonts/Pretendard-Medium.ttf'),
+        'Pretendard-Bold': require('../assets/fonts/Pretendard-Bold.ttf'),
       });
       setFontsLoaded(true);
     }
@@ -16,13 +18,25 @@ export default function useFont() {
     loadFonts();
   }, []);
 
-  const customTextProps = {
+  const customRegularTextProps = {
     style: {
-      fontFamily: 'Pretendard',
+      fontFamily: 'Pretendard-Regular',
+    },
+  };
+  const customMediumTextProps = {
+    style: {
+      fontFamily: 'Pretendard-Medium',
+    },
+  };
+  const customBoldTextProps = {
+    style: {
+      fontFamily: 'Pretendard-Bold',
     },
   };
 
-  setCustomText(customTextProps);
+  setCustomText(customRegularTextProps);
+  setCustomText(customMediumTextProps);
+  setCustomText(customBoldTextProps);
 
   return {
     fontsLoaded,

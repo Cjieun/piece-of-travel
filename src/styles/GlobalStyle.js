@@ -1,5 +1,17 @@
 import styled from 'styled-components/native';
 
 export const GlobalText = styled.Text`
-  font-family: 'Pretendard';
+  font-family: ${({weight}) =>
+    weight === 'bold'
+      ? 'Pretendard-Bold'
+      : weight === 'light'
+        ? 'Pretendard-Regular'
+        : 'Pretendard-Medium'};
+`;
+
+export const GlobalView = styled.View`
+  flex: 1;
+  padding: 47px 20px 0 20px;
+  align-items: center;
+  background-color: #fff;
 `;

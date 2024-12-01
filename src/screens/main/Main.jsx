@@ -1,4 +1,6 @@
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GlobalView} from '../../styles/GlobalStyle';
 import {
   MainAddCircle,
@@ -13,20 +15,26 @@ import {
 import MainBox from '../../components/mainBox/MainBox';
 import {useMain} from './hooks';
 
-const travels = [
-  {
-    id: 1,
-    image: require('../../assets/images/example_image.png'),
-    title: '후쿠오카 가족 여행',
-    place: 'Fukuoka, Japan',
-    beginDate: '2024.10.14',
-    endDate: '2024.10.16',
-    pieces: 3,
-  },
-];
-
 export default function Main() {
   const {handlePress} = useMain();
+  const [travels, setTravels] = useState([]); // travels 상태 관리
+
+  // 로컬 스토리지에서 데이터를 가져오는 함수
+  const fetchTravels = async () => {
+    try {
+      const storedTravels = await AsyncStorage.getItem('travels');
+      if (storedTravels) {
+        setTravels(JSON.parse(storedTravels)); // travels 상태 업데이트
+      }
+    } catch (error) {
+      console.error('Failed to load travels:', error);
+    }
+  };
+
+  // 컴포넌트가 마운트될 때 데이터 가져오기
+  useEffect(() => {
+    fetchTravels();
+  }, []);
 
   return (
     <GlobalView>
@@ -47,7 +55,10 @@ export default function Main() {
               <MainBox
                 key={travel.id}
                 id={travel.id}
-                image={travel.image}
+                image={
+                  travel.image ||
+                  require('../../assets/images/example_image.png')
+                } // 기본 이미지
                 title={travel.title}
                 place={travel.place}
                 beginDate={travel.beginDate}
@@ -63,7 +74,7 @@ export default function Main() {
             </MainAddCircle>
           </MainScrollView>
         ) : (
-          <MainNoneBox>
+          <MainNoneBox onPress={handlePress}>
             <Image
               source={require('../../assets/images/add.png')}
               style={{width: 60, height: 60}}

@@ -11,10 +11,10 @@ import {
 import CustomButton from '../../components/customButton/CustomButton';
 import TextInput from '../../components/textInput/TextInput';
 import BackButton from '../../components/backButton/BackButton';
-import {useAddTravels} from './hooks'; // hooks.js 가져오기
+import {useAddTravels} from './hooks';
 
 export default function AddTravels() {
-  const {saveTravel} = useAddTravels(); // 훅 사용
+  const {saveTravel} = useAddTravels();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
@@ -42,7 +42,6 @@ export default function AddTravels() {
   };
 
   const handleSave = async () => {
-    // Title과 Place 값 확인
     console.log('Title:', title);
     console.log('Place:', place);
 
@@ -51,7 +50,6 @@ export default function AddTravels() {
       return;
     }
 
-    // saveTravel 호출
     await saveTravel({title, place, startDate, endDate});
   };
 
@@ -95,7 +93,7 @@ export default function AddTravels() {
           />
         )}
 
-        <Label>여행지</Label>
+        <Label style={{marginTop: '8'}}>여행지</Label>
         <TextInput
           placeholder="여행지를 입력하세요"
           value={place}

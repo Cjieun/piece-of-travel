@@ -17,21 +17,19 @@ import {useMain} from './hooks';
 
 export default function Main() {
   const {handlePress} = useMain();
-  const [travels, setTravels] = useState([]); // travels 상태 관리
+  const [travels, setTravels] = useState([]);
 
-  // 로컬 스토리지에서 데이터를 가져오는 함수
   const fetchTravels = async () => {
     try {
       const storedTravels = await AsyncStorage.getItem('travels');
       if (storedTravels) {
-        setTravels(JSON.parse(storedTravels)); // travels 상태 업데이트
+        setTravels(JSON.parse(storedTravels));
       }
     } catch (error) {
       console.error('Failed to load travels:', error);
     }
   };
 
-  // 컴포넌트가 마운트될 때 데이터 가져오기
   useEffect(() => {
     fetchTravels();
   }, []);

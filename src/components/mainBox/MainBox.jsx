@@ -52,7 +52,7 @@ export default function MainBox({
               style={{width: 20, height: 20}}
             />
             <MainBoxDescriptionText>
-              {days} Days ({beginDate} - {endDate})
+              {days} Days ({beginDate} ~ {endDate})
             </MainBoxDescriptionText>
           </MainBoxDescriptionPair>
         </MainBoxDescriptionBox>

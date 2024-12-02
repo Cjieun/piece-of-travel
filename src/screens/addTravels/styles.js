@@ -3,8 +3,6 @@ import {GlobalText} from '../../styles/GlobalStyle';
 
 export const AddTravelsContainer = styled.View`
   flex: 1;
-  padding: 80px 20px 20px;
-  background-color: #ffffff;
 `;
 
 export const HeaderText = styled(GlobalText).attrs({
@@ -13,6 +11,7 @@ export const HeaderText = styled(GlobalText).attrs({
   font-size: 25px;
   color: #000;
   margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 export const Label = styled(GlobalText).attrs({
@@ -40,4 +39,5 @@ export const DatePickerButton = styled.TouchableOpacity`
   margin: 0 5px;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 `;

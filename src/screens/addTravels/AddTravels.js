@@ -12,6 +12,7 @@ import CustomButton from '../../components/customButton/CustomButton';
 import TextInput from '../../components/textInput/TextInput';
 import BackButton from '../../components/backButton/BackButton';
 import {useAddTravels} from './hooks';
+import {GlobalView} from '../../styles/GlobalStyle';
 
 export default function AddTravels() {
   const {saveTravel} = useAddTravels();
@@ -54,11 +55,10 @@ export default function AddTravels() {
   };
 
   return (
-    <>
-      <BackButton />
+    <GlobalView backgroundColor="#f9f7f7">
       <AddTravelsContainer>
+        <BackButton />
         <HeaderText>여행 추가중</HeaderText>
-
         <Label>여행 이름</Label>
         <TextInput
           placeholder="여행 이름을 입력하세요"
@@ -105,6 +105,6 @@ export default function AddTravels() {
 
         <CustomButton title="추가하기" onPress={handleSave} />
       </AddTravelsContainer>
-    </>
+    </GlobalView>
   );
 }

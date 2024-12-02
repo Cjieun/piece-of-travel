@@ -10,7 +10,7 @@ import {
   MainBoxDescriptionText,
   MainBoxPiecesText,
 } from './styles';
-import {calculateDays} from '../../modules/useDate';
+import {calculateDays, formatDate} from '../../modules/useDate';
 import {useMainBox} from './hooks';
 
 export default function MainBox({
@@ -23,6 +23,8 @@ export default function MainBox({
   pieces,
 }) {
   const days = calculateDays(beginDate, endDate);
+  const formattedBeginDate = formatDate(beginDate);
+  const formattedEndDate = formatDate(endDate);
   const {handlePress} = useMainBox(id);
 
   return (
@@ -52,7 +54,7 @@ export default function MainBox({
               style={{width: 20, height: 20}}
             />
             <MainBoxDescriptionText>
-              {days} Days ({beginDate} ~ {endDate})
+              {days} Days ({formattedBeginDate} ~ {formattedEndDate})
             </MainBoxDescriptionText>
           </MainBoxDescriptionPair>
         </MainBoxDescriptionBox>

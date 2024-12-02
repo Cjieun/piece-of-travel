@@ -13,3 +13,8 @@ export function calculateDays(beginDate, endDate) {
   const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
   return differenceInDays + 1;
 }
+
+export function formatDate(dateString) {
+  const [year, month, day] = dateString.split('-');
+  return `${year}.${month}.${day}`;
+}

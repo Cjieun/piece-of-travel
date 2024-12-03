@@ -10,6 +10,7 @@ export const DetailHeader = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 export const DetailHeaderText = styled(GlobalText).attrs({weight: 'bold'})`
@@ -30,6 +31,7 @@ export const DetailKebabContainer = styled.View`
   background-color: #fff;
   border-radius: 5px;
   elevation: 5;
+  z-index: 10;
 `;
 
 export const DetailKebabText = styled(GlobalText).attrs({weight: 'light'})`
@@ -50,3 +52,14 @@ export const DetailKebabTop = styled(DetailKebabItem)`
 `;
 
 export const DetailKebabBottom = styled(DetailKebabItem)``;
+
+export const DetailMap = styled.View`
+  height: 210px;
+  background-color: #d9d9d9;
+`;
+
+export const DetailSelectBox = styled.View`
+  flex-direction: row;
+  gap: 10px;
+  margin: 20px 0 15px;
+`;

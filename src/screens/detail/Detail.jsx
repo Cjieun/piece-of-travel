@@ -8,13 +8,17 @@ import {
   DetailKebabTop,
   DetailKebabText,
   DetailKebabBottom,
+  DetailMap,
+  DetailSelectBox,
 } from './styles';
 import BackButton from '../../components/backButton/BackButton';
 import {Image} from 'react-native';
 import {useDetail} from './hooks';
+import DaySelect from '../../components/daySelect/DaySelect';
 
 export default function Detail() {
-  const {showKebab, toggleKebab} = useDetail();
+  const {showKebab, toggleKebab, dayLabels, selectedDay, setSelectedDay} =
+    useDetail();
 
   return (
     <GlobalView>
@@ -39,6 +43,17 @@ export default function Detail() {
             </DetailKebabContainer>
           )}
         </DetailHeader>
+        <DetailMap />
+        <DetailSelectBox>
+          {dayLabels.map(day => (
+            <DaySelect
+              day={day}
+              key={day}
+              isSelected={selectedDay === day}
+              onPress={() => setSelectedDay(day)}
+            />
+          ))}
+        </DetailSelectBox>
       </DetailContainer>
     </GlobalView>
   );

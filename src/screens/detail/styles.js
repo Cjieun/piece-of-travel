@@ -63,3 +63,9 @@ export const DetailSelectBox = styled.View`
   gap: 10px;
   margin: 20px 0 15px;
 `;
+
+export const DetailDateText = styled(GlobalText)`
+  color: #585858;
+  font-size: 16px;
+  margin-bottom: 15px;
+`;

@@ -6,7 +6,9 @@ export const GlobalText = styled.Text`
       ? 'Pretendard-Bold'
       : weight === 'light'
         ? 'Pretendard-Regular'
-        : 'Pretendard-Medium'};
+        : weight === 'semiBold'
+          ? 'Pretendard-SemiBold'
+          : 'Pretendard-Medium'};
 `;
 
 export const GlobalView = styled.View`

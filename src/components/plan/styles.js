@@ -5,6 +5,9 @@ export const PlanNumContainer = styled.View`
   flex-direction: row;
   gap: 14px;
   align-items: center;
+  position: absolute;
+  top: -3;
+  left: -10;
 `;
 
 export const PlanNumBox = styled.View`
@@ -28,16 +31,26 @@ export const PlanNumTime = styled(GlobalText).attrs({weight: 'semiBold'})`
 
 export const PlanContainer = styled.View`
   position: relative;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-left: 25.5px;
+  padding-bottom: 15px;
+  margin-left: 10.5px;
+  border-left-width: 1px;
+  border-left-color: #dbe2ef;
 `;
 
 export const PlanBoxContainer = styled.View`
+  flex: 1;
+`;
+
+export const PlanBoxBox = styled.View`
   padding: 14px 16px 15px 17.75px;
   flex-direction: row;
   justify-content: space-between;
   border-radius: 5px;
   background-color: #fff;
   elevation: 4;
-  margin-left: 35px;
   margin-top: 10px;
 `;
 
@@ -66,4 +79,5 @@ export const PlanBoxMemo = styled(GlobalText)`
 export const PlanAIDelete = styled.TouchableOpacity`
   position: absolute;
   right: -10;
+  top: 15;
 `;

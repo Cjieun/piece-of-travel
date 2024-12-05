@@ -69,3 +69,18 @@ export const DetailDateText = styled(GlobalText)`
   font-size: 16px;
   margin-bottom: 15px;
 `;
+
+export const DetailButtonPair = styled.View`
+  gap: 8px;
+  margin-top: 30px;
+`;
+
+export const DetailFlatList = styled.FlatList`
+  margin-bottom: 30.5px;
+`;
+
+export const DetailAIButton = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 30;
+  right: 0;
+`;

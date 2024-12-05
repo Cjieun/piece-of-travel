@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Image} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GlobalView} from '../../styles/GlobalStyle';
 import {
   MainAddCircle,
@@ -15,23 +14,7 @@ import {useMain} from './hooks';
 import NoneBox from '../../components/noneBox/NoneBox';
 
 export default function Main() {
-  const {handlePress} = useMain();
-  const [travels, setTravels] = useState([]);
-
-  const fetchTravels = async () => {
-    try {
-      const storedTravels = await AsyncStorage.getItem('travels');
-      if (storedTravels) {
-        setTravels(JSON.parse(storedTravels));
-      }
-    } catch (error) {
-      console.error('Failed to load travels:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchTravels();
-  }, []);
+  const {handlePress, travels} = useMain();
 
   return (
     <GlobalView>

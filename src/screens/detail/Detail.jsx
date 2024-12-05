@@ -12,7 +12,6 @@ import {
   DetailSelectBox,
   DetailDateText,
   DetailFlatList,
-  DetailButton,
   DetailAIButton,
   DetailButtonPair,
 } from './styles';
@@ -24,49 +23,82 @@ import NoneBox from '../../components/noneBox/NoneBox';
 import PlanBox from '../../components/plan/PlanBox';
 import CustomButton from '../../components/customButton/CustomButton';
 
-const plans = [
+export const plans = [
   {
-    time: '오후 1:00',
-    title: '공항 도착',
-    place: '후쿠오카 국제 공항',
-    mapPlace: '3 Chome-2-19 Tenjin, Chuo Ward, Fukuoka, 810-0001',
-    memo: '4번 출구로 나간 후 셔틀버스 탑승',
-    isDone: false,
-    puzzles: [],
-    AI: false,
+    day: 1,
+    items: [
+      {
+        time: '오후 1:00',
+        title: '공항 도착',
+        place: '후쿠오카 국제 공항',
+        mapPlace: '3 Chome-2-19 Tenjin, Chuo Ward, Fukuoka, 810-0001',
+        memo: '4번 출구로 나간 후 셔틀버스 탑승',
+        isDone: false,
+        puzzles: [],
+        AI: false,
+      },
+      {
+        time: '오후 3:00',
+        title: '호텔 체크인',
+        place: '그랜드 호텔',
+        mapPlace: '4 Chome-2-1 Hakata, Fukuoka',
+        memo: '체크인 후 짐 정리',
+        isDone: false,
+        puzzles: [],
+        AI: false,
+      },
+    ],
   },
   {
-    time: '오후 1:20',
-    title: '점심 식사',
-    place: '이치란 라멘',
-    mapPlace: '2 Chome-2-1, Hakata Ekimae, Hakata Ward, Fukuoka',
-    memo: '텐진지하가 거리와 조금 가까운 곳!',
-    isDone: false,
-    puzzles: [],
-    AI: false,
-  },
-  {
-    time: '오후 2:30',
-    title: '지하 쇼핑 센터 구경',
-    place: '텐진 지하가',
-    mapPlace: '810-0001 Hakata Ward, Tenjin, Fukuoka',
-    memo: '모든 구간 와이파이 무료 이용 가능, 애플 파이 꼭 먹기',
-    isDone: false,
-    puzzles: [],
-    AI: false,
+    day: 2,
+    items: [
+      {
+        time: '오전 9:00',
+        title: '아침 식사',
+        place: '카페 모닝 브리즈',
+        mapPlace: '1 Chome-1-1 Tenjin, Chuo Ward, Fukuoka',
+        memo: '아침 메뉴 확인 후 주문',
+        isDone: false,
+        puzzles: [],
+        AI: false,
+      },
+      {
+        time: '오후 1:30',
+        title: '쇼핑',
+        place: '텐진 지하가',
+        mapPlace: 'Hakata Ward, Tenjin, Fukuoka',
+        memo: '쇼핑 후 카페 휴식',
+        isDone: false,
+        puzzles: [],
+        AI: false,
+      },
+    ],
   },
 ];
 
 export default function Detail() {
-  const {showKebab, toggleKebab, dayLabels, selectedDay, setSelectedDay} =
-    useDetail();
+  const {
+    showKebab,
+    toggleKebab,
+    dayLabels,
+    selectedDay,
+    setSelectedDay,
+    travel,
+    title,
+    getSelectedDate,
+    selectedPlans,
+  } = useDetail();
+
+  if (!travel) {
+    return null;
+  }
 
   return (
     <GlobalView>
       <DetailContainer>
         <DetailHeader>
           <BackButton />
-          <DetailHeaderText>후쿠오카 가족 여행</DetailHeaderText>
+          <DetailHeaderText>{title}</DetailHeaderText>
           <DetailHeaderKebab onPress={toggleKebab}>
             <Image
               source={require('../../assets/images/kebab.png')}
@@ -95,10 +127,10 @@ export default function Detail() {
             />
           ))}
         </DetailSelectBox>
-        <DetailDateText>2024.10.14</DetailDateText>
+        <DetailDateText>{getSelectedDate()}</DetailDateText>
         <DetailFlatList
-          data={plans}
-          keyExtractor={(item, index) => index.toString()}
+          data={selectedPlans}
+          keyExtractor={item => item.time}
           renderItem={({item, index}) => (
             <PlanBox
               index={index + 1}
@@ -118,10 +150,12 @@ export default function Detail() {
             paddingRight: 6,
           }}
           ListFooterComponent={
-            <DetailButtonPair>
-              <CustomButton title="추가하기" type="secondary" />
-              <CustomButton title="완료하기" type="primary" />
-            </DetailButtonPair>
+            selectedPlans.length > 0 ? (
+              <DetailButtonPair>
+                <CustomButton title="추가하기" type="secondary" />
+                <CustomButton title="완료하기" type="primary" />
+              </DetailButtonPair>
+            ) : null
           }
           showsVerticalScrollIndicator={false}
         />

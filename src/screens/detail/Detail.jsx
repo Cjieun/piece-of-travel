@@ -1,4 +1,5 @@
 import {GlobalView} from '../../styles/GlobalStyle';
+import React, {useState} from 'react';
 import {
   DetailContainer,
   DetailHeader,
@@ -10,19 +11,27 @@ import {
   DetailKebabBottom,
   DetailMap,
   DetailSelectBox,
+  AddDetailButton,
+  AddDetailButtonText,
+  DetailNoneBox,
+  DetailNoneBoxText,
   DetailDateText,
 } from './styles';
 import BackButton from '../../components/backButton/BackButton';
 import {Image} from 'react-native';
 import {useDetail} from './hooks';
+import {useNavigateToAddDetail} from './hooks';
 import DaySelect from '../../components/daySelect/DaySelect';
 import NoneBox from '../../components/noneBox/NoneBox';
 import PlanNum from '../../components/plan/PlanNum';
 import PlanBox from '../../components/plan/PlanBox';
 
 export default function Detail() {
+  const [plans, setPlans] = useState([]);
   const {showKebab, toggleKebab, dayLabels, selectedDay, setSelectedDay} =
     useDetail();
+
+  const {navigateToAddDetail} = useNavigateToAddDetail();
 
   return (
     <GlobalView>
@@ -59,7 +68,7 @@ export default function Detail() {
           ))}
         </DetailSelectBox>
         <DetailDateText>2024.10.14</DetailDateText>
-        <NoneBox />
+        <NoneBox onPress={navigateToAddDetail} />
         <PlanNum num="1" />
         <PlanBox
           title="공항 도착"
@@ -70,6 +79,16 @@ export default function Detail() {
           puzzles={[]}
           AI={false}
         />
+        <AddDetailButton onPress={navigateToAddDetail}>
+          <AddDetailButtonText>추가하기</AddDetailButtonText>
+        </AddDetailButton>
+        {/* {plans.length > 0 ? (
+          <AddDetailButton onPress={navigateToAddDetail}>
+            <AddDetailButtonText>추가하기</AddDetailButtonText>
+          </AddDetailButton>
+        ) : (
+            <NoneBox onPress={navigateToAddDetail} />
+        )} */}
       </DetailContainer>
     </GlobalView>
   );

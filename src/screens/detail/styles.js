@@ -69,3 +69,34 @@ export const DetailDateText = styled(GlobalText)`
   font-size: 16px;
   margin-bottom: 15px;
 `;
+
+export const AddDetailButton = styled.TouchableOpacity`
+  width: 100%;
+  height: 50px;
+  border: 1px solid #3f72af;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-top: 20px;
+`;
+
+export const AddDetailButtonText = styled(GlobalText)`
+  color: #3f72af;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const DetailNoneBox = styled.TouchableOpacity`
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid #d7d7d7;
+  background-color: #fff;
+`;
+
+export const DetailNoneBoxText = styled(GlobalText)`
+  color: #b8b8b8;
+  font-size: 14px;
+`;

@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {calculateDays} from '../../modules/useDate';
+import {useNavigation} from '@react-navigation/native';
 
 export function useDetail() {
   const [showKebab, setShowKebab] = useState(false);
@@ -20,4 +21,14 @@ export function useDetail() {
   }
 
   return {showKebab, toggleKebab, dayLabels, selectedDay, setSelectedDay};
+}
+
+export function useNavigateToAddDetail() {
+  const navigation = useNavigation();
+
+  const navigateToAddDetail = () => {
+    navigation.navigate('addDetail');
+  };
+
+  return {navigateToAddDetail};
 }

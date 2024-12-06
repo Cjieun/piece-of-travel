@@ -4,6 +4,7 @@ import Layout from '../screens/Layout';
 import Main from '../screens/main/Main';
 import AddTravels from '../screens/addTravels/AddTravels';
 import Detail from '../screens/detail/Detail';
+import AddPlans from '../screens/addPlans/AddPlans';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function Navigation() {
         <Stack.Screen name="/test" component={Layout} />
         <Stack.Screen name="addTravels" component={AddTravels} />
         <Stack.Screen name="detail" component={Detail} />
+        <Stack.Screen name="addPlans" component={AddPlans} />
       </Stack.Navigator>
     </NavigationContainer>
   );

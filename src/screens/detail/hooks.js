@@ -1,10 +1,14 @@
-import {useState, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 import {calculateDays} from '../../modules/useDate';
-import {useRoute} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {plans} from './Detail';
 
 export function useDetail() {
+  const navigation = useNavigation();
   const route = useRoute();
   const {id} = route.params;
 
@@ -21,8 +25,10 @@ export function useDetail() {
         const selectedTravel = parsedTravels.find(travel => travel.id === id);
         setTravel(selectedTravel);
 
-        if (plans) {
-          const dayPlans = plans.find(plan => plan.day === selectedDay);
+        if (selectedTravel && selectedTravel.plans) {
+          const dayPlans = selectedTravel.plans.find(
+            plan => plan.day === selectedDay,
+          );
           setSelectedPlans(dayPlans?.items || []);
         }
       }
@@ -31,14 +37,11 @@ export function useDetail() {
     }
   };
 
-  useEffect(() => {
-    fetchTravel();
-  }, [id, selectedDay]);
-
-  useEffect(() => {
-    console.log('travel:', travel);
-    console.log('plans:', plans);
-  }, [travel, plans]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchTravel();
+    }, [id, selectedDay]),
+  );
 
   const toggleKebab = () => {
     setShowKebab(prev => !prev);
@@ -59,6 +62,10 @@ export function useDetail() {
     return date.toISOString().split('T')[0].replace(/-/g, '.');
   };
 
+  const handleAddPlans = () => {
+    navigation.navigate('addPlans', {id, selectedDay});
+  };
+
   return {
     showKebab,
     toggleKebab,
@@ -69,5 +76,6 @@ export function useDetail() {
     title,
     getSelectedDate,
     selectedPlans,
+    handleAddPlans,
   };
 }

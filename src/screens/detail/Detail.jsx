@@ -87,6 +87,7 @@ export default function Detail() {
     title,
     getSelectedDate,
     selectedPlans,
+    handleAddPlans,
   } = useDetail();
 
   if (!travel) {
@@ -144,7 +145,7 @@ export default function Detail() {
               AI={item.AI}
             />
           )}
-          ListEmptyComponent={<NoneBox />}
+          ListEmptyComponent={<NoneBox onPress={handleAddPlans} />}
           contentContainerStyle={{
             paddingTop: 3,
             paddingRight: 6,
@@ -152,7 +153,11 @@ export default function Detail() {
           ListFooterComponent={
             selectedPlans.length > 0 ? (
               <DetailButtonPair>
-                <CustomButton title="추가하기" type="secondary" />
+                <CustomButton
+                  title="추가하기"
+                  type="secondary"
+                  onPress={handleAddPlans}
+                />
                 <CustomButton title="완료하기" type="primary" />
               </DetailButtonPair>
             ) : null

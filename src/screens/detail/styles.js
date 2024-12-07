@@ -58,6 +58,10 @@ export const DetailMap = styled.View`
   background-color: #d9d9d9;
 `;
 
+export const DetailSelectScrollBox = styled.ScrollView`
+  max-height: 70px;
+`;
+
 export const DetailSelectBox = styled.View`
   flex-direction: row;
   gap: 10px;

@@ -14,6 +14,7 @@ import {
   DetailFlatList,
   DetailAIButton,
   DetailButtonPair,
+  DetailSelectScrollBox,
 } from './styles';
 import BackButton from '../../components/backButton/BackButton';
 import {Image} from 'react-native';
@@ -22,59 +23,6 @@ import DaySelect from '../../components/daySelect/DaySelect';
 import NoneBox from '../../components/noneBox/NoneBox';
 import PlanBox from '../../components/plan/PlanBox';
 import CustomButton from '../../components/customButton/CustomButton';
-
-export const plans = [
-  {
-    day: 1,
-    items: [
-      {
-        time: '오후 1:00',
-        title: '공항 도착',
-        place: '후쿠오카 국제 공항',
-        mapPlace: '3 Chome-2-19 Tenjin, Chuo Ward, Fukuoka, 810-0001',
-        memo: '4번 출구로 나간 후 셔틀버스 탑승',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-      {
-        time: '오후 3:00',
-        title: '호텔 체크인',
-        place: '그랜드 호텔',
-        mapPlace: '4 Chome-2-1 Hakata, Fukuoka',
-        memo: '체크인 후 짐 정리',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-    ],
-  },
-  {
-    day: 2,
-    items: [
-      {
-        time: '오전 9:00',
-        title: '아침 식사',
-        place: '카페 모닝 브리즈',
-        mapPlace: '1 Chome-1-1 Tenjin, Chuo Ward, Fukuoka',
-        memo: '아침 메뉴 확인 후 주문',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-      {
-        time: '오후 1:30',
-        title: '쇼핑',
-        place: '텐진 지하가',
-        mapPlace: 'Hakata Ward, Tenjin, Fukuoka',
-        memo: '쇼핑 후 카페 휴식',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-    ],
-  },
-];
 
 export default function Detail() {
   const {
@@ -91,6 +39,8 @@ export default function Detail() {
     fetchTravel,
     handlePlansDone,
     allPlansDone,
+    handleUpdateTravel,
+    handleDeleteTravel,
   } = useDetail();
 
   if (!travel) {
@@ -111,26 +61,30 @@ export default function Detail() {
           </DetailHeaderKebab>
           {showKebab && (
             <DetailKebabContainer>
-              <DetailKebabTop>
+              <DetailKebabTop onPress={handleUpdateTravel}>
                 <DetailKebabText>수정하기</DetailKebabText>
               </DetailKebabTop>
-              <DetailKebabBottom>
+              <DetailKebabBottom onPress={handleDeleteTravel}>
                 <DetailKebabText>삭제하기</DetailKebabText>
               </DetailKebabBottom>
             </DetailKebabContainer>
           )}
         </DetailHeader>
         <DetailMap />
-        <DetailSelectBox>
-          {dayLabels.map(day => (
-            <DaySelect
-              day={day}
-              key={day}
-              isSelected={selectedDay === day}
-              onPress={() => setSelectedDay(day)}
-            />
-          ))}
-        </DetailSelectBox>
+        <DetailSelectScrollBox
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          <DetailSelectBox>
+            {dayLabels.map(day => (
+              <DaySelect
+                day={day}
+                key={day}
+                isSelected={selectedDay === day}
+                onPress={() => setSelectedDay(day)}
+              />
+            ))}
+          </DetailSelectBox>
+        </DetailSelectScrollBox>
         <DetailDateText>{getSelectedDate()}</DetailDateText>
         <DetailFlatList
           data={selectedPlans}

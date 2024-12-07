@@ -119,6 +119,48 @@ export function useDetail() {
     );
   };
 
+  const handleUpdateTravel = () => {
+    navigation.navigate('editTravels', {travel});
+  };
+
+  const handleDeleteTravel = async () => {
+    Alert.alert(
+      '삭제 확인',
+      '이 여행을 삭제하시겠습니까? 삭제 후 복구할 수 없습니다.',
+      [
+        {
+          text: '취소',
+          style: 'cancel',
+        },
+        {
+          text: '삭제',
+          onPress: async () => {
+            try {
+              const storedTravels = await AsyncStorage.getItem('travels');
+              if (!storedTravels) return;
+
+              const parsedTravels = JSON.parse(storedTravels);
+
+              const updatedTravels = parsedTravels.filter(
+                travelItem => travelItem.id !== travel.id,
+              );
+
+              await AsyncStorage.setItem(
+                'travels',
+                JSON.stringify(updatedTravels),
+              );
+
+              navigation.navigate('main');
+            } catch (error) {
+              console.error('여행 삭제 실패:', error);
+            }
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
   const allPlansDone = selectedPlans.every(plan => plan.isDone);
 
   return {
@@ -135,5 +177,7 @@ export function useDetail() {
     fetchTravel,
     handlePlansDone,
     allPlansDone,
+    handleUpdateTravel,
+    handleDeleteTravel,
   };
 }

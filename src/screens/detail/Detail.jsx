@@ -88,6 +88,9 @@ export default function Detail() {
     getSelectedDate,
     selectedPlans,
     handleAddPlans,
+    fetchTravel,
+    handlePlansDone,
+    allPlansDone,
   } = useDetail();
 
   if (!travel) {
@@ -143,6 +146,9 @@ export default function Detail() {
               isDone={item.isDone}
               puzzles={item.puzzles}
               AI={item.AI}
+              day={selectedDay}
+              travelId={travel.id}
+              onDelete={fetchTravel}
             />
           )}
           ListEmptyComponent={<NoneBox onPress={handleAddPlans} />}
@@ -151,14 +157,18 @@ export default function Detail() {
             paddingRight: 6,
           }}
           ListFooterComponent={
-            selectedPlans.length > 0 ? (
+            selectedPlans.length > 0 && !allPlansDone ? (
               <DetailButtonPair>
                 <CustomButton
                   title="추가하기"
                   type="secondary"
                   onPress={handleAddPlans}
                 />
-                <CustomButton title="완료하기" type="primary" />
+                <CustomButton
+                  title="완료하기"
+                  type="primary"
+                  onPress={handlePlansDone}
+                />
               </DetailButtonPair>
             ) : null
           }

@@ -47,7 +47,7 @@ export function useAddPlans() {
         plan => plan.day === selectedDay,
       );
 
-      const lastId = 0;
+      let lastId = 0;
 
       if (dayIndex !== -1) {
         const currentDayItems = selectedTravel.plans[dayIndex].items || [];

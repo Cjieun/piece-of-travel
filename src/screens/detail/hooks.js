@@ -6,6 +6,7 @@ import {
   useFocusEffect,
 } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Alert} from 'react-native';
 
 export function useDetail() {
   const navigation = useNavigation();
@@ -31,6 +32,7 @@ export function useDetail() {
           );
           setSelectedPlans(dayPlans?.items || []);
         }
+        console.log(selectedPlans);
       }
     } catch (error) {
       console.error('여행 정보 조회 실패:', error);
@@ -66,6 +68,59 @@ export function useDetail() {
     navigation.navigate('addPlans', {id, selectedDay});
   };
 
+  const handlePlansDone = async () => {
+    Alert.alert(
+      '완료 확인',
+      '모든 일정을 완료 상태로 변경하시겠습니까?',
+      [
+        {
+          text: '취소',
+          style: 'cancel',
+        },
+        {
+          text: '완료',
+          onPress: async () => {
+            try {
+              const storedTravels = await AsyncStorage.getItem('travels');
+              if (!storedTravels) return;
+
+              const parsedTravels = JSON.parse(storedTravels);
+
+              const travelIndex = parsedTravels.findIndex(
+                travel => travel.id === id,
+              );
+              if (travelIndex === -1) return;
+
+              const selectedTravel = parsedTravels[travelIndex];
+              const dayIndex = selectedTravel.plans.findIndex(
+                plan => plan.day === selectedDay,
+              );
+
+              if (dayIndex !== -1) {
+                selectedTravel.plans[dayIndex].items = selectedTravel.plans[
+                  dayIndex
+                ].items.map(item => ({...item, isDone: true}));
+
+                parsedTravels[travelIndex] = selectedTravel;
+                await AsyncStorage.setItem(
+                  'travels',
+                  JSON.stringify(parsedTravels),
+                );
+
+                fetchTravel();
+              }
+            } catch (error) {
+              console.log('일정 완료 실패: ', error);
+            }
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
+  const allPlansDone = selectedPlans.every(plan => plan.isDone);
+
   return {
     showKebab,
     toggleKebab,
@@ -77,5 +132,8 @@ export function useDetail() {
     getSelectedDate,
     selectedPlans,
     handleAddPlans,
+    fetchTravel,
+    handlePlansDone,
+    allPlansDone,
   };
 }

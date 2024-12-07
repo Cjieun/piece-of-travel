@@ -1,10 +1,8 @@
 import styled from 'styled-components/native';
 
-export const BackButtonContainer = styled.TouchableOpacity`
-  margin-left: -8px;
-`;
+export const BackButtonContainer = styled.TouchableOpacity``;
 
 export const BackButtonImage = styled.Image`
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
 `;

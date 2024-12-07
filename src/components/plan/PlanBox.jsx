@@ -12,7 +12,6 @@ import {
 } from './styles';
 import PlanNum from './PlanNum';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
 
 export default function PlanBox({
   index,
@@ -71,17 +70,6 @@ export default function PlanBox({
       console.log('일정 삭제 실패: ', error);
     }
   };
-  const navigation = useNavigation();
-
-  const addPuzzle = () => {
-    navigation.navigate('addPiece', {
-      travelId, // 여행 ID
-      day, // 여행 날짜
-      time, // 일정 시간
-      puzzles, // 현재 퍼즐 정보
-      title, // 일정 제목
-    });
-  };
 
   return (
     <PlanContainer>
@@ -104,19 +92,15 @@ export default function PlanBox({
                 />
               </TouchableOpacity>
             ) : Object.keys(puzzles).length === 0 ? (
-              <TouchableOpacity onPress={addPuzzle}>
-                <Image
-                  source={require('../../assets/images/puzzle-outline.png')}
-                  style={{width: 20, height: 20}}
-                />
-              </TouchableOpacity>
+              <Image
+                source={require('../../assets/images/puzzle-outline.png')}
+                style={{width: 20, height: 20}}
+              />
             ) : (
-              <TouchableOpacity onPress={() => console.log('조각 있을 때')}>
-                <Image
-                  source={require('../../assets/images/puzzle.png')}
-                  style={{width: 17.5, height: 17.5}}
-                />
-              </TouchableOpacity>
+              <Image
+                source={require('../../assets/images/puzzle.png')}
+                style={{width: 17.5, height: 17.5}}
+              />
             ))}
         </PlanBoxBox>
       </PlanBoxContainer>

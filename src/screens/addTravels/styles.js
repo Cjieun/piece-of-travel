@@ -36,11 +36,11 @@ export const MapPlaceholder = styled.View`
 
 export const DatePickerButton = styled.TouchableOpacity`
   flex: 1;
-  padding: 10px;
+  width: 160px;
+  height: 52px;
   border-width: 1px;
   border-color: #ccc;
-  border-radius: 5px;
-  margin: 0 5px;
+  border-radius: 8px;
   justify-content: center;
   align-items: center;
   background-color: #fff;

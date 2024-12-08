@@ -81,3 +81,10 @@ export const PlanAIDelete = styled.TouchableOpacity`
   right: -10;
   top: 15;
 `;
+
+export const PlanBoxFeedback = styled(GlobalText).attrs({weight: 'light'})`
+  color: #333;
+  font-size: 11px;
+  margin-top: 10px;
+  margin-left: 5px;
+`;

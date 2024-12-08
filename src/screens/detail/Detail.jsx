@@ -33,7 +33,7 @@ export default function Detail() {
     setSelectedDay,
     travel,
     title,
-    getSelectedDate,
+    selectedDate,
     selectedPlans,
     handleAddPlans,
     fetchTravel,
@@ -41,6 +41,7 @@ export default function Detail() {
     allPlansDone,
     handleUpdateTravel,
     handleDeleteTravel,
+    handleAI,
   } = useDetail();
 
   if (!travel) {
@@ -85,7 +86,7 @@ export default function Detail() {
             ))}
           </DetailSelectBox>
         </DetailSelectScrollBox>
-        <DetailDateText>{getSelectedDate()}</DetailDateText>
+        <DetailDateText>{selectedDate}</DetailDateText>
         <DetailFlatList
           data={selectedPlans}
           keyExtractor={item => item.time}
@@ -128,12 +129,14 @@ export default function Detail() {
           }
           showsVerticalScrollIndicator={false}
         />
-        <DetailAIButton>
-          <Image
-            source={require('../../assets/images/AI.png')}
-            style={{width: 60, height: 60}}
-          />
-        </DetailAIButton>
+        {!allPlansDone && (
+          <DetailAIButton onPress={handleAI}>
+            <Image
+              source={require('../../assets/images/AI.png')}
+              style={{width: 60, height: 60}}
+            />
+          </DetailAIButton>
+        )}
       </DetailContainer>
     </GlobalView>
   );

@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import {GlobalText} from '../../styles/GlobalStyle';
 
 export const ButtonContainer = styled.TouchableOpacity`
+  width: ${({size}) => (size === 's' ? '49%' : '100%')};
   height: 50px;
   border-radius: 10px;
   background-color: ${({type}) => (type === 'primary' ? '#3f72af' : '#fff')};

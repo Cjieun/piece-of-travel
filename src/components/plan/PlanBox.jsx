@@ -3,6 +3,7 @@ import {
   PlanAIDelete,
   PlanBoxBox,
   PlanBoxContainer,
+  PlanBoxFeedback,
   PlanBoxMapPlace,
   PlanBoxMemo,
   PlanBoxPlace,
@@ -23,6 +24,7 @@ export default function PlanBox({
   isDone,
   puzzles,
   AI,
+  feedback,
   day,
   travelId,
   onDelete,
@@ -84,6 +86,7 @@ export default function PlanBox({
             <PlanBoxMemo>{memo}</PlanBoxMemo>
           </View>
           {!AI &&
+            feedback !== '' &&
             (!isDone ? (
               <TouchableOpacity onPress={deleteItem}>
                 <Image
@@ -103,9 +106,10 @@ export default function PlanBox({
               />
             ))}
         </PlanBoxBox>
+        {AI && feedback && <PlanBoxFeedback>{feedback}</PlanBoxFeedback>}
       </PlanBoxContainer>
-      {AI && (
-        <PlanAIDelete>
+      {AI && feedback && (
+        <PlanAIDelete onPress={onDelete}>
           <Image
             source={require('../../assets/images/delete_ai.png')}
             style={{width: 24, height: 24}}

@@ -1,7 +1,5 @@
-
 import {useState, useCallback} from 'react';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
-import {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useMain = id => {

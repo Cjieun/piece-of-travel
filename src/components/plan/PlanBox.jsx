@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {TouchableOpacity, View, Image, Alert} from 'react-native';
 import {
   PlanAIDelete,
@@ -13,6 +14,7 @@ import {
 import PlanNum from './PlanNum';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
+import PuzzleModal from '../puzzleModal/PuzzleModal';
 
 export default function PlanBox({
   index,
@@ -28,6 +30,17 @@ export default function PlanBox({
   travelId,
   onDelete,
 }) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const deleteItem = async () => {
     try {
       Alert.alert('삭제 확인', '이 일정을 삭제하시겠습니까?', [
@@ -71,15 +84,12 @@ export default function PlanBox({
       console.log('일정 삭제 실패: ', error);
     }
   };
-  const navigation = useNavigation();
 
   const addPuzzle = () => {
     navigation.navigate('addPiece', {
-      travelId, // 여행 ID
-      day, // 여행 날짜
-      time, // 일정 시간
-      puzzles, // 현재 퍼즐 정보
-      title, // 일정 제목
+      travelId,
+      day,
+      itemId: index,
     });
   };
 
@@ -111,7 +121,7 @@ export default function PlanBox({
                 />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity onPress={() => console.log('조각 있을 때')}>
+              <TouchableOpacity onPress={openModal}>
                 <Image
                   source={require('../../assets/images/puzzle.png')}
                   style={{width: 17.5, height: 17.5}}
@@ -119,6 +129,15 @@ export default function PlanBox({
               </TouchableOpacity>
             ))}
         </PlanBoxBox>
+        <PuzzleModal
+          visible={modalVisible}
+          onClose={closeModal}
+          day={index}
+          title={title}
+          place={place}
+          memo={memo}
+          images={puzzles.images}
+        />
       </PlanBoxContainer>
       {AI && (
         <PlanAIDelete>

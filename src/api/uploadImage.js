@@ -1,4 +1,4 @@
-import {API_BASE_URL} from '../config';
+import {API_URL} from '@env';
 export const uploadImage = async uri => {
   const formData = new FormData();
   formData.append('file', {
@@ -8,7 +8,7 @@ export const uploadImage = async uri => {
   });
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/files/upload`, {
+    const response = await fetch(`${API_URL}/files/upload`, {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',

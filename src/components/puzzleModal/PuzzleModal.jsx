@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Modal,
-  Image,
-  ScrollView,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {Modal, Image, ScrollView} from 'react-native';
 import {
   Overlay,
   Content,
@@ -18,7 +11,7 @@ import {
   HeaderContainer,
 } from './styles';
 
-const PuzzleModal = ({
+export default function PuzzleModal({
   visible,
   onClose,
   day,
@@ -26,43 +19,41 @@ const PuzzleModal = ({
   place,
   memo,
   images = [],
-}) => {
+}) {
   return (
-    <Modal visible={visible} transparent={true} animationType="slide">
-      <TouchableWithoutFeedback onPress={onClose}>
-        <Overlay>
-          <TouchableWithoutFeedback>
-            <Content>
-              <HeaderContainer>
-                <Day>Day {day}</Day>
-                <Title>{title}</Title>
-              </HeaderContainer>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={true}
-                contentContainerStyle={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}
-                keyboardShouldPersistTaps="handled">
-                {images.map((image, index) => (
-                  <PuzzleImage key={index} source={{uri: image}} />
-                ))}
-              </ScrollView>
-              <Place>
-                <Image
-                  source={require('../../assets/images/location.png')}
-                  style={{width: 16, height: 16}}
-                />{' '}
-                {place}
-              </Place>
-              <Memo>{memo}</Memo>
-            </Content>
-          </TouchableWithoutFeedback>
-        </Overlay>
-      </TouchableWithoutFeedback>
+    <Modal
+      visible={visible}
+      transparent={true}
+      animationType="slide"
+      onRequestClose={onClose}>
+      <Overlay>
+        <Content>
+          <HeaderContainer>
+            <Day>Day {day}</Day>
+            <Title>{title}</Title>
+          </HeaderContainer>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={true}
+            contentContainerStyle={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+            keyboardShouldPersistTaps="handled">
+            {images.map((image, index) => (
+              <PuzzleImage key={index} source={{uri: image}} />
+            ))}
+          </ScrollView>
+          <Place>
+            <Image
+              source={require('../../assets/images/location.png')}
+              style={{width: 16, height: 16}}
+            />{' '}
+            {place}
+          </Place>
+          <Memo>{memo}</Memo>
+        </Content>
+      </Overlay>
     </Modal>
   );
-};
-
-export default PuzzleModal;
+}

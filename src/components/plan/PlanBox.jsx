@@ -136,7 +136,7 @@ export default function PlanBox({
           title={title}
           place={place}
           memo={memo}
-          images={puzzles.images}
+          images={puzzles?.images || []}
         />
       </PlanBoxContainer>
       {AI && (

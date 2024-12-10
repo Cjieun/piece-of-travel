@@ -3,7 +3,7 @@
 # dependencies
 node_modules/
 
-config.js
+.env
 # Expo
 .expo/
 dist/

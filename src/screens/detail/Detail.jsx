@@ -48,6 +48,8 @@ export default function Detail() {
     return null;
   }
 
+  const isButtonVisible = selectedPlans.length === 0 || !allPlansDone;
+
   return (
     <GlobalView>
       <DetailContainer>
@@ -72,20 +74,16 @@ export default function Detail() {
           )}
         </DetailHeader>
         <DetailMap />
-        <DetailSelectScrollBox
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-          <DetailSelectBox>
-            {dayLabels.map(day => (
-              <DaySelect
-                day={day}
-                key={day}
-                isSelected={selectedDay === day}
-                onPress={() => setSelectedDay(day)}
-              />
-            ))}
-          </DetailSelectBox>
-        </DetailSelectScrollBox>
+        <DetailSelectBox>
+          {dayLabels.map(day => (
+            <DaySelect
+              day={day}
+              key={day}
+              isSelected={selectedDay === day}
+              onPress={() => setSelectedDay(day)}
+            />
+          ))}
+        </DetailSelectBox>
         <DetailDateText>{selectedDate}</DetailDateText>
         <DetailFlatList
           data={selectedPlans}
@@ -110,6 +108,7 @@ export default function Detail() {
           contentContainerStyle={{
             paddingTop: 3,
             paddingRight: 6,
+            paddingBottom: 30.5,
           }}
           ListFooterComponent={
             selectedPlans.length > 0 && !allPlansDone ? (
@@ -129,7 +128,7 @@ export default function Detail() {
           }
           showsVerticalScrollIndicator={false}
         />
-        {!allPlansDone && (
+        {isButtonVisible && (
           <DetailAIButton onPress={handleAI}>
             <Image
               source={require('../../assets/images/AI.png')}

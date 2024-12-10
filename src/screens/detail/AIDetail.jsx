@@ -24,6 +24,7 @@ export default function AIDetail() {
     selectedDate,
     handleGoBack,
     deleteAIPlan,
+    handleSaveFeedback,
   } = useAIDetail();
 
   if (!selectedTravel) {
@@ -67,6 +68,7 @@ export default function AIDetail() {
           contentContainerStyle={{
             paddingTop: 3,
             paddingRight: 6,
+            paddingBottom: 30.5,
           }}
           ListFooterComponent={
             AIPlans.length > 0 ? (
@@ -77,7 +79,12 @@ export default function AIDetail() {
                   size="s"
                   onPress={handleGoBack}
                 />
-                <CustomButton title="적용하기" type="primary" size="s" />
+                <CustomButton
+                  title="적용하기"
+                  type="primary"
+                  size="s"
+                  onPress={handleSaveFeedback}
+                />
               </DetailAIButtonPair>
             ) : null
           }

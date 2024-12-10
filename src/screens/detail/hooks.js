@@ -258,6 +258,73 @@ export function useAIDetail() {
     );
   };
 
+  const handleSaveFeedback = async () => {
+    Alert.alert(
+      'AI 피드백 적용',
+      'AI 피드백이 기존 일정에 덮어씌워집니다. 진행하시겠습니까?',
+      [
+        {text: '취소', style: 'cancel'},
+        {
+          text: '적용',
+          onPress: async () => {
+            try {
+              const storedTravels = await AsyncStorage.getItem('travels');
+              if (!storedTravels) return;
+
+              const parsedTravels = JSON.parse(storedTravels);
+
+              const travelIndex = parsedTravels.findIndex(
+                travel => travel.id === selectedTravel.id,
+              );
+
+              if (travelIndex === -1) return;
+
+              const updatedTravel = {...parsedTravels[travelIndex]};
+              const dayIndex = updatedTravel.plans.findIndex(
+                plan => plan.day === selectedDay,
+              );
+
+              const updatedAIPlans = AIPlans.map(plan => ({
+                ...plan,
+                AI: false,
+                feedback: '',
+              }));
+
+              if (dayIndex !== -1) {
+                updatedTravel.plans[dayIndex].items = updatedAIPlans;
+              } else {
+                updatedTravel.plans.push({
+                  day: selectedDay,
+                  items: updatedAIPlans,
+                });
+              }
+
+              parsedTravels[travelIndex] = updatedTravel;
+
+              await AsyncStorage.setItem(
+                'travels',
+                JSON.stringify(parsedTravels),
+              );
+
+              Alert.alert(
+                '적용 완료',
+                'AI 피드백이 일정에 성공적으로 적용되었습니다.',
+              );
+              navigation.goBack();
+            } catch (error) {
+              console.error('AI 피드백 적용 실패:', error);
+              Alert.alert(
+                '적용 실패',
+                '일정 적용 중 문제가 발생했습니다. 다시 시도해주세요.',
+              );
+            }
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
   return {
     selectedTravel,
     AIPlans,
@@ -265,5 +332,6 @@ export function useAIDetail() {
     selectedDate,
     handleGoBack,
     deleteAIPlan,
+    handleSaveFeedback,
   };
 }

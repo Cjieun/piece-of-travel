@@ -77,7 +77,7 @@ export const DetailSelectScrollBox = styled.ScrollView`
 export const DetailSelectBox = styled.View`
   flex-direction: row;
   gap: 10px;
-  margin: 20px 0 15px;
+  padding: 20px 0 15px;
 `;
 
 export const DetailDateText = styled(GlobalText)`
@@ -92,7 +92,7 @@ export const DetailButtonPair = styled.View`
 `;
 
 export const DetailFlatList = styled.FlatList`
-  margin-bottom: 30.5px;
+  flex-grow: 1;
 `;
 
 export const DetailAIButton = styled.TouchableOpacity`

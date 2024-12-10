@@ -33,7 +33,6 @@ export const AddImage = styled.Image`
 `;
 
 export const PieceMemo = styled.TextInput`
-  width: 350px;
   height: 250px;
   border-radius: 8px;
   border: 1px solid #d9d9d9;

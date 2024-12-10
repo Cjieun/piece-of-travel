@@ -8,13 +8,12 @@ import {
   DetailKebabTop,
   DetailKebabText,
   DetailKebabBottom,
-  DetailMap,
+  DetailImage,
   DetailSelectBox,
   DetailDateText,
   DetailFlatList,
   DetailAIButton,
   DetailButtonPair,
-  DetailSelectScrollBox,
 } from './styles';
 import BackButton from '../../components/backButton/BackButton';
 import {Image} from 'react-native';
@@ -73,7 +72,13 @@ export default function Detail() {
             </DetailKebabContainer>
           )}
         </DetailHeader>
-        <DetailMap />
+        <DetailImage
+          source={
+            travel.thumbnail
+              ? {uri: travel.thumbnail}
+              : require('../../assets/images/example_image.png')
+          }
+        />
         <DetailSelectBox>
           {dayLabels.map(day => (
             <DaySelect

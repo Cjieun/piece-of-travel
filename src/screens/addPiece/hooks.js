@@ -1,16 +1,13 @@
 import {useState, useEffect} from 'react';
 import {Alert} from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import {uploadImage} from '../../api/uploadImage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {useSelectImage} from '../../modules/useSelectImage';
 
-export const useAddPiece = () => {
+export const useAddPiece = uploadedUrls => {
   const route = useRoute();
   const navigation = useNavigation();
   const {travelId, day, itemId} = route.params;
-  const [images, setImages] = useState([null, null, null]);
-  const [uploadedUrls, setUploadedUrls] = useState([null, null, null]);
   const [content, setContent] = useState('');
   const [travelData, setTravelData] = useState([]);
 
@@ -29,34 +26,8 @@ export const useAddPiece = () => {
     loadTravelData();
   }, []);
 
-  const handleImageSelect = async index => {
-    const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('권한 필요', '사진 접근 권한을 허용해주세요.');
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      const newImages = [...images];
-      newImages[index] = result.assets[0].uri;
-      setImages(newImages);
-
-      const uploadedUrl = await uploadImage(result.assets[0].uri);
-      if (uploadedUrl) {
-        const newUrls = [...uploadedUrls];
-        newUrls[index] = uploadedUrl;
-        setUploadedUrls(newUrls);
-      }
-    }
-  };
-
   const handleSubmit = async () => {
+    console.log(uploadedUrls);
     const validUrls = uploadedUrls.filter(Boolean);
     if (validUrls.length < 1 || !content.trim()) {
       Alert.alert(
@@ -108,11 +79,8 @@ export const useAddPiece = () => {
   };
 
   return {
-    images,
-    uploadedUrls,
     content,
     setContent,
-    handleImageSelect,
     handleSubmit,
   };
 };

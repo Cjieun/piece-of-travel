@@ -36,8 +36,9 @@ export default function Main() {
                 key={travel.id}
                 id={travel.id}
                 image={
-                  travel.image ||
-                  require('../../assets/images/example_image.png')
+                  travel.thumbnail
+                    ? {uri: travel.thumbnail}
+                    : require('../../assets/images/example_image.png')
                 }
                 title={travel.title}
                 place={travel.place}

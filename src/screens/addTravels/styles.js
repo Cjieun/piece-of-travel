@@ -26,12 +26,19 @@ export const Label = styled(GlobalText).attrs({
   margin-bottom: 8px;
 `;
 
-export const MapPlaceholder = styled.View`
-  height: 200px;
-  border: 1px solid #d7d7d7;
-  border-radius: 10px;
-  background-color: #f2f2f2;
-  margin-top: 12px;
+export const ImageUploadBox = styled.TouchableOpacity`
+  height: 245px;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const AddImage = styled.Image`
+  width: 50px;
+  height: 50px;
 `;
 
 export const DatePickerButton = styled.TouchableOpacity`

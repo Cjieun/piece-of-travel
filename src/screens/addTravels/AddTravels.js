@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, Platform, Alert} from 'react-native';
+import {View, Text, Platform, Alert, Image} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   AddTravelsContainer,
   HeaderText,
   Label,
-  MapPlaceholder,
+  ImageUploadBox,
+  AddImage,
   DatePickerButton,
   AddTravelsForm,
 } from './styles';
@@ -14,8 +15,11 @@ import TextInput from '../../components/textInput/TextInput';
 import BackButton from '../../components/backButton/BackButton';
 import {useAddTravels} from './hooks';
 import {GlobalView} from '../../styles/GlobalStyle';
+import {useSelectImage} from '../../modules/useSelectImage';
 
 export default function AddTravels() {
+  const {image, uploadedUrl, handleImageSelect} = useSelectImage();
+
   const {saveTravel} = useAddTravels();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -52,7 +56,7 @@ export default function AddTravels() {
       return;
     }
 
-    await saveTravel({title, place, startDate, endDate});
+    await saveTravel({title, place, startDate, endDate, uploadedUrl});
   };
 
   return (
@@ -110,7 +114,19 @@ export default function AddTravels() {
                 value={place}
                 onChangeText={setPlace}
               />
-              <MapPlaceholder />
+            </View>
+            <View>
+              <Label>썸네일</Label>
+              <ImageUploadBox onPress={() => handleImageSelect()}>
+                {image ? (
+                  <Image
+                    source={{uri: image}}
+                    style={{width: '100%', height: '100%', borderRadius: 8}}
+                  />
+                ) : (
+                  <AddImage source={require('../../assets/images/add.png')} />
+                )}
+              </ImageUploadBox>
             </View>
           </AddTravelsForm>
         </View>

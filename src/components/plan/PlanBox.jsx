@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {TouchableOpacity, View, Image, Alert} from 'react-native';
 import {
   PlanAIDelete,
@@ -13,6 +14,8 @@ import {
 } from './styles';
 import PlanNum from './PlanNum';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import PuzzleModal from '../puzzleModal/PuzzleModal';
 
 export default function PlanBox({
   index,
@@ -29,6 +32,17 @@ export default function PlanBox({
   travelId,
   onDelete,
 }) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const deleteItem = async () => {
     try {
       Alert.alert('삭제 확인', '이 일정을 삭제하시겠습니까?', [
@@ -73,6 +87,14 @@ export default function PlanBox({
     }
   };
 
+  const addPuzzle = () => {
+    navigation.navigate('addPiece', {
+      travelId,
+      day,
+      itemId: index,
+    });
+  };
+
   return (
     <PlanContainer>
       <PlanNum>{index}</PlanNum>
@@ -95,17 +117,30 @@ export default function PlanBox({
                 />
               </TouchableOpacity>
             ) : Object.keys(puzzles).length === 0 ? (
-              <Image
-                source={require('../../assets/images/puzzle-outline.png')}
-                style={{width: 20, height: 20}}
-              />
+              <TouchableOpacity onPress={addPuzzle}>
+                <Image
+                  source={require('../../assets/images/puzzle-outline.png')}
+                  style={{width: 20, height: 20}}
+                />
+              </TouchableOpacity>
             ) : (
-              <Image
-                source={require('../../assets/images/puzzle.png')}
-                style={{width: 17.5, height: 17.5}}
-              />
+              <TouchableOpacity onPress={openModal}>
+                <Image
+                  source={require('../../assets/images/puzzle.png')}
+                  style={{width: 17.5, height: 17.5}}
+                />
+              </TouchableOpacity>
             ))}
         </PlanBoxBox>
+        <PuzzleModal
+          visible={modalVisible}
+          onClose={closeModal}
+          day={index}
+          title={title}
+          place={place}
+          memo={memo}
+          images={puzzles?.images || []}
+        />
         {AI && feedback && <PlanBoxFeedback>{feedback}</PlanBoxFeedback>}
       </PlanBoxContainer>
       {AI && feedback && (

@@ -73,14 +73,18 @@ export default function AddTravels() {
             <View>
               <Label>여행 기간</Label>
               <View
-                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}>
                 {/* 시작일 */}
                 <DatePickerButton onPress={() => openPicker('start')}>
                   <Text style={{textAlign: 'center'}}>
                     {startDate.toISOString().split('T')[0]}
                   </Text>
                 </DatePickerButton>
-
+                <Text style={{marginHorizontal: 8}}>~</Text>
                 {/* 종료일 */}
                 <DatePickerButton onPress={() => openPicker('end')}>
                   <Text style={{textAlign: 'center'}}>

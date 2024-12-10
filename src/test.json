@@ -1,0 +1,76 @@
+[
+  {
+    "id": 1,
+    "title": "후쿠오카 가족 여행",
+    "place": "일본 후쿠오카",
+    "beginDate": "2024-10-14",
+    "endDate": "2024-10-17",
+    "pieces": 4,
+    "plans": [
+      {
+        "day": 1,
+        "items": [
+          {
+            "id": 1,
+            "time": "오후 1:00",
+            "title": "공항 도착",
+            "place": "후쿠오카 국제 공항",
+            "mapPlace": "3 Chome-2-19 Tenjin, Chuo Ward, Fukuoka, 810-0001",
+            "memo": "4번 출구로 나간 후 셔틀버스 탑승",
+            "isDone": false,
+            "puzzle": {
+              "images": ["http://", "http://"],
+              "content": "공항 밥 맛없음"
+            },
+            "AI": false,
+            "feedback": ""
+          },
+          {
+            "id": 2,
+            "time": "오후 3:00",
+            "title": "호텔 체크인",
+            "place": "그랜드 호텔",
+            "mapPlace": "4 Chome-2-1 Hakata, Fukuoka",
+            "memo": "체크인 후 짐 정리",
+            "isDone": false,
+            "puzzle": {},
+            "AI": false
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "items": [
+          {
+            "time": "오전 9:00",
+            "title": "아침 식사",
+            "place": "카페 모닝 브리즈",
+            "mapPlace": "1 Chome-1-1 Tenjin, Chuo Ward, Fukuoka",
+            "memo": "아침 메뉴 확인 후 주문",
+            "isDone": false,
+            "puzzles": [],
+            "AI": false
+          },
+          {
+            "time": "오후 1:30",
+            "title": "쇼핑",
+            "place": "텐진 지하가",
+            "mapPlace": "Hakata Ward, Tenjin, Fukuoka",
+            "memo": "쇼핑 후 카페 휴식",
+            "isDone": false,
+            "puzzles": [],
+            "AI": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "제주도 더블 데이트",
+    "place": "제주도 애월읍",
+    "beginDate": "2024-12-29",
+    "endDate": "2025-01-01",
+    "pieces": 4
+  }
+]

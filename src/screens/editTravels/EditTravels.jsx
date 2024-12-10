@@ -1,67 +1,42 @@
-import React, {useState} from 'react';
-import {View, Text, Platform, Alert} from 'react-native';
+import React from 'react';
+import {View, Text, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
-  AddTravelsContainer,
+  EditTravelsContainer,
   HeaderText,
   Label,
   MapPlaceholder,
   DatePickerButton,
-  AddTravelsForm,
+  EditTravelsForm,
 } from './styles';
 import CustomButton from '../../components/customButton/CustomButton';
 import TextInput from '../../components/textInput/TextInput';
 import BackButton from '../../components/backButton/BackButton';
-import {useAddTravels} from './hooks';
 import {GlobalView} from '../../styles/GlobalStyle';
+import {useEditTravel} from './hooks';
 
-export default function AddTravels() {
-  const {saveTravel} = useAddTravels();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(false);
-  const [currentPicker, setCurrentPicker] = useState('');
-  const [title, setTitle] = useState('');
-  const [place, setPlace] = useState('');
-
-  const handleDateConfirm = (event, selectedDate) => {
-    if (selectedDate) {
-      if (currentPicker === 'start') {
-        setStartDate(selectedDate);
-        if (selectedDate > endDate) {
-          setEndDate(selectedDate);
-        }
-      } else if (currentPicker === 'end') {
-        setEndDate(selectedDate);
-      }
-    }
-    setShowPicker(false);
-  };
-
-  const openPicker = pickerType => {
-    setCurrentPicker(pickerType);
-    setShowPicker(true);
-  };
-
-  const handleSave = async () => {
-    console.log('Title:', title);
-    console.log('Place:', place);
-
-    if (!title.trim() || !place.trim()) {
-      Alert.alert('Error', '여행 이름과 여행지를 입력하세요.');
-      return;
-    }
-
-    await saveTravel({title, place, startDate, endDate});
-  };
+export default function EditTravels() {
+  const {
+    showPicker,
+    title,
+    setTitle,
+    place,
+    setPlace,
+    startDate,
+    endDate,
+    handleDateConfirm,
+    currentPicker,
+    openPicker,
+    handleUpdate,
+  } = useEditTravel();
 
   return (
     <GlobalView backgroundColor="#f9f7f7">
-      <AddTravelsContainer>
+      <EditTravelsContainer>
         <View>
           <BackButton />
-          <HeaderText>여행 추가중</HeaderText>
-          <AddTravelsForm>
+          <HeaderText>여행 수정중</HeaderText>
+          <EditTravelsForm>
             <View>
               <Label>여행 이름</Label>
               <TextInput
@@ -108,10 +83,10 @@ export default function AddTravels() {
               />
               <MapPlaceholder />
             </View>
-          </AddTravelsForm>
+          </EditTravelsForm>
         </View>
-        <CustomButton title="추가하기" onPress={handleSave} />
-      </AddTravelsContainer>
+        <CustomButton title="수정하기" onPress={handleUpdate} />
+      </EditTravelsContainer>
     </GlobalView>
   );
 }

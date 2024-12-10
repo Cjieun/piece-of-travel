@@ -11,6 +11,7 @@ export default function useFont() {
         'Pretendard-Regular': require('../assets/fonts/Pretendard-Regular.ttf'),
         'Pretendard-Medium': require('../assets/fonts/Pretendard-Medium.ttf'),
         'Pretendard-Bold': require('../assets/fonts/Pretendard-Bold.ttf'),
+        'Pretendard-SemiBold': require('../assets/fonts/Pretendard-SemiBold.ttf'),
       });
       setFontsLoaded(true);
     }
@@ -33,10 +34,16 @@ export default function useFont() {
       fontFamily: 'Pretendard-Bold',
     },
   };
+  const customSemiBoldTextProps = {
+    style: {
+      fontFamily: 'Pretendard-SemiBold',
+    },
+  };
 
   setCustomText(customRegularTextProps);
   setCustomText(customMediumTextProps);
   setCustomText(customBoldTextProps);
+  setCustomText(customSemiBoldTextProps);
 
   return {
     fontsLoaded,

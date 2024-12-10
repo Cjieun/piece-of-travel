@@ -35,7 +35,7 @@ export const useAddTravels = () => {
 
       console.log('Travel saved successfully:', travels);
 
-      navigation.navigate('/');
+      navigation.navigate('main');
     } catch (error) {
       console.error('Failed to save travel:', error);
       Alert.alert('Error', '여행 데이터를 저장하는 데 문제가 발생했습니다.');

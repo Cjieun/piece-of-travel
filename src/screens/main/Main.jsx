@@ -7,12 +7,11 @@ import {
   MainBannerSpan,
   MainBannerText,
   MainContainer,
-  MainNoneBox,
-  MainNoneBoxText,
   MainScrollView,
 } from './styles';
 import MainBox from '../../components/mainBox/MainBox';
 import {useMain} from './hooks';
+import NoneBox from '../../components/noneBox/NoneBox';
 
 export default function Main() {
   const {handlePress, travels} = useMain();
@@ -55,13 +54,7 @@ export default function Main() {
             </MainAddCircle>
           </MainScrollView>
         ) : (
-          <MainNoneBox onPress={handlePress}>
-            <Image
-              source={require('../../assets/images/add.png')}
-              style={{width: 60, height: 60}}
-            />
-            <MainNoneBoxText>여행 일정을 등록해보세요 !</MainNoneBoxText>
-          </MainNoneBox>
+          <NoneBox onPress={handlePress} />
         )}
       </MainContainer>
     </GlobalView>

@@ -1,15 +1,11 @@
-import {useState, useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useState, useCallback} from 'react';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useMain = id => {
   const navigation = useNavigation();
 
   const [travels, setTravels] = useState([]);
-
-  const handlePress = () => {
-    navigation.navigate('/addTravels');
-  };
 
   const fetchTravels = async () => {
     try {
@@ -18,13 +14,19 @@ export const useMain = id => {
         setTravels(JSON.parse(storedTravels));
       }
     } catch (error) {
-      console.error('여행 목록을 불러오는데 실패했습니다.', error);
+      console.error('여행 일정 조회 실패', error);
     }
   };
 
-  useEffect(() => {
-    fetchTravels();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchTravels();
+    }, []),
+  );
 
-  return {handlePress, travels};
+  const handlePress = () => {
+    navigation.navigate('addTravels', {id});
+  };
+
+  return {handlePress, travels, setTravels};
 };

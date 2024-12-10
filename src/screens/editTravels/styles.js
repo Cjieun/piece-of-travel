@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {GlobalText} from '../../styles/GlobalStyle';
 
-export const AddTravelsContainer = styled.View`
+export const EditTravelsContainer = styled.View`
   flex: 1;
   width: 100%;
   padding-bottom: 36px;
@@ -46,6 +46,6 @@ export const DatePickerButton = styled.TouchableOpacity`
   background-color: #fff;
 `;
 
-export const AddTravelsForm = styled.View`
+export const EditTravelsForm = styled.View`
   gap: 16px;
 `;

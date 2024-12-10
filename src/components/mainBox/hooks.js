@@ -4,7 +4,7 @@ export const useMainBox = id => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('Detail', {id});
+    navigation.navigate('detail', {id});
   };
 
   return {handlePress};

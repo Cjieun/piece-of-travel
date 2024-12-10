@@ -6,12 +6,14 @@ export const GlobalText = styled.Text`
       ? 'Pretendard-Bold'
       : weight === 'light'
         ? 'Pretendard-Regular'
-        : 'Pretendard-Medium'};
+        : weight === 'semiBold'
+          ? 'Pretendard-SemiBold'
+          : 'Pretendard-Medium'};
 `;
 
 export const GlobalView = styled.View`
   flex: 1;
   padding: 47px 20px 0 20px;
   align-items: center;
-  background-color: #fff;
+  background-color: ${({backgroundColor}) => backgroundColor || '#fff'};
 `;

@@ -6,6 +6,8 @@ import AddTravels from '../screens/addTravels/AddTravels';
 import Detail from '../screens/detail/Detail';
 import AddPlans from '../screens/addPlans/AddPlans';
 import AddPiece from '../screens/addPiece/AddPiece';
+import EditTravels from '../screens/editTravels/EditTravels';
+import AIDetail from '../screens/detail/AIDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +21,8 @@ export default function Navigation() {
         <Stack.Screen name="detail" component={Detail} />
         <Stack.Screen name="addPlans" component={AddPlans} />
         <Stack.Screen name="addPiece" component={AddPiece} />
+        <Stack.Screen name="editTravels" component={EditTravels} />
+        <Stack.Screen name="aiDetail" component={AIDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

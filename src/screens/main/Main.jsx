@@ -38,7 +38,7 @@ export default function Main() {
                 image={
                   travel.image ||
                   require('../../assets/images/example_image.png')
-                } // 기본 이미지
+                }
                 title={travel.title}
                 place={travel.place}
                 beginDate={travel.beginDate}

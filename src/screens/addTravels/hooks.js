@@ -27,7 +27,7 @@ export const useAddTravels = () => {
         place,
         beginDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0],
-        pieces,
+        pieces: 0,
       };
 
       travels.push(newTravel);

@@ -13,3 +13,14 @@ export function calculateDays(beginDate, endDate) {
   const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
   return differenceInDays + 1;
 }
+
+export function formatDate(dateString) {
+  const [year, month, day] = dateString.split('-');
+  return `${year}.${month}.${day}`;
+}
+
+export function getSelectedDate(beginDate, selectedDay) {
+  const date = new Date(beginDate);
+  date.setDate(date.getDate() + (selectedDay - 1));
+  return date.toISOString().split('T')[0].replace(/-/g, '.');
+}

@@ -14,6 +14,7 @@ import {
   DetailFlatList,
   DetailAIButton,
   DetailButtonPair,
+  DetailSelectScrollBox,
 } from './styles';
 import BackButton from '../../components/backButton/BackButton';
 import {Image} from 'react-native';
@@ -22,59 +23,6 @@ import DaySelect from '../../components/daySelect/DaySelect';
 import NoneBox from '../../components/noneBox/NoneBox';
 import PlanBox from '../../components/plan/PlanBox';
 import CustomButton from '../../components/customButton/CustomButton';
-
-export const plans = [
-  {
-    day: 1,
-    items: [
-      {
-        time: '오후 1:00',
-        title: '공항 도착',
-        place: '후쿠오카 국제 공항',
-        mapPlace: '3 Chome-2-19 Tenjin, Chuo Ward, Fukuoka, 810-0001',
-        memo: '4번 출구로 나간 후 셔틀버스 탑승',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-      {
-        time: '오후 3:00',
-        title: '호텔 체크인',
-        place: '그랜드 호텔',
-        mapPlace: '4 Chome-2-1 Hakata, Fukuoka',
-        memo: '체크인 후 짐 정리',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-    ],
-  },
-  {
-    day: 2,
-    items: [
-      {
-        time: '오전 9:00',
-        title: '아침 식사',
-        place: '카페 모닝 브리즈',
-        mapPlace: '1 Chome-1-1 Tenjin, Chuo Ward, Fukuoka',
-        memo: '아침 메뉴 확인 후 주문',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-      {
-        time: '오후 1:30',
-        title: '쇼핑',
-        place: '텐진 지하가',
-        mapPlace: 'Hakata Ward, Tenjin, Fukuoka',
-        memo: '쇼핑 후 카페 휴식',
-        isDone: false,
-        puzzles: [],
-        AI: false,
-      },
-    ],
-  },
-];
 
 export default function Detail() {
   const {
@@ -85,17 +33,22 @@ export default function Detail() {
     setSelectedDay,
     travel,
     title,
-    getSelectedDate,
+    selectedDate,
     selectedPlans,
     handleAddPlans,
     fetchTravel,
     handlePlansDone,
     allPlansDone,
+    handleUpdateTravel,
+    handleDeleteTravel,
+    handleAI,
   } = useDetail();
 
   if (!travel) {
     return null;
   }
+
+  const isButtonVisible = selectedPlans.length === 0 || !allPlansDone;
 
   return (
     <GlobalView>
@@ -111,10 +64,10 @@ export default function Detail() {
           </DetailHeaderKebab>
           {showKebab && (
             <DetailKebabContainer>
-              <DetailKebabTop>
+              <DetailKebabTop onPress={handleUpdateTravel}>
                 <DetailKebabText>수정하기</DetailKebabText>
               </DetailKebabTop>
-              <DetailKebabBottom>
+              <DetailKebabBottom onPress={handleDeleteTravel}>
                 <DetailKebabText>삭제하기</DetailKebabText>
               </DetailKebabBottom>
             </DetailKebabContainer>
@@ -131,7 +84,7 @@ export default function Detail() {
             />
           ))}
         </DetailSelectBox>
-        <DetailDateText>{getSelectedDate()}</DetailDateText>
+        <DetailDateText>{selectedDate}</DetailDateText>
         <DetailFlatList
           data={selectedPlans}
           keyExtractor={item => item.time}
@@ -155,6 +108,7 @@ export default function Detail() {
           contentContainerStyle={{
             paddingTop: 3,
             paddingRight: 6,
+            paddingBottom: 30.5,
           }}
           ListFooterComponent={
             selectedPlans.length > 0 && !allPlansDone ? (
@@ -174,12 +128,14 @@ export default function Detail() {
           }
           showsVerticalScrollIndicator={false}
         />
-        <DetailAIButton>
-          <Image
-            source={require('../../assets/images/AI.png')}
-            style={{width: 60, height: 60}}
-          />
-        </DetailAIButton>
+        {isButtonVisible && (
+          <DetailAIButton onPress={handleAI}>
+            <Image
+              source={require('../../assets/images/AI.png')}
+              style={{width: 60, height: 60}}
+            />
+          </DetailAIButton>
+        )}
       </DetailContainer>
     </GlobalView>
   );

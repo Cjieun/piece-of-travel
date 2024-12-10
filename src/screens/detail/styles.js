@@ -13,6 +13,18 @@ export const DetailHeader = styled.View`
   margin-bottom: 16px;
 `;
 
+export const AIDetailHeader = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+`;
+
+export const AIBackButton = styled.View`
+  position: absolute;
+  left: -8px;
+`;
+
 export const DetailHeaderText = styled(GlobalText).attrs({weight: 'bold'})`
   color: #000;
   font-size: 24px;
@@ -58,10 +70,14 @@ export const DetailMap = styled.View`
   background-color: #d9d9d9;
 `;
 
+export const DetailSelectScrollBox = styled.ScrollView`
+  max-height: 70px;
+`;
+
 export const DetailSelectBox = styled.View`
   flex-direction: row;
   gap: 10px;
-  margin: 20px 0 15px;
+  padding: 20px 0 15px;
 `;
 
 export const DetailDateText = styled(GlobalText)`
@@ -76,11 +92,19 @@ export const DetailButtonPair = styled.View`
 `;
 
 export const DetailFlatList = styled.FlatList`
-  margin-bottom: 30.5px;
+  flex-grow: 1;
 `;
 
 export const DetailAIButton = styled.TouchableOpacity`
   position: absolute;
   bottom: 30;
   right: 0;
+`;
+
+export const DetailAIButtonPair = styled.View`
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
 `;

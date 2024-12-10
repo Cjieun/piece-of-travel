@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useState, useCallback} from 'react';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useMain = id => {
@@ -18,9 +18,11 @@ export const useMain = id => {
     }
   };
 
-  useEffect(() => {
-    fetchTravels();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchTravels();
+    }, []),
+  );
 
   const handlePress = () => {
     navigation.navigate('addTravels', {id});

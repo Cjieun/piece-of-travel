@@ -5,7 +5,13 @@ import {Alert} from 'react-native';
 export const useAddTravels = () => {
   const navigation = useNavigation();
 
-  const saveTravel = async ({title, place, startDate, endDate}) => {
+  const saveTravel = async ({
+    title,
+    place,
+    startDate,
+    endDate,
+    uploadedUrl,
+  }) => {
     if (!title || !place) {
       Alert.alert('Error', '여행 이름과 여행지를 입력하세요.');
       return;
@@ -27,6 +33,7 @@ export const useAddTravels = () => {
         place,
         beginDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0],
+        thumbnail: uploadedUrl,
         pieces: 0,
       };
 

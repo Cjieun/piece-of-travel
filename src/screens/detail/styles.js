@@ -65,9 +65,10 @@ export const DetailKebabTop = styled(DetailKebabItem)`
 
 export const DetailKebabBottom = styled(DetailKebabItem)``;
 
-export const DetailMap = styled.View`
+export const DetailImage = styled.Image`
   height: 210px;
-  background-color: #d9d9d9;
+  width: 100%;
+  border-radius: 10px;
 `;
 
 export const DetailSelectScrollBox = styled.ScrollView`

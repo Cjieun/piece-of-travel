@@ -12,10 +12,11 @@ import BackButton from '../../components/backButton/BackButton';
 import {GlobalView} from '../../styles/GlobalStyle';
 import CustomButton from '../../components/customButton/CustomButton';
 import {useAddPiece} from './hooks';
+import {useSelectImage} from '../../modules/useSelectImage';
 
 export default function AddPiece() {
-  const {images, content, setContent, handleImageSelect, handleSubmit} =
-    useAddPiece();
+  const {images, uploadedUrls, handleImageSelect} = useSelectImage();
+  const {content, setContent, handleSubmit} = useAddPiece(uploadedUrls);
 
   return (
     <GlobalView backgroundColor="#f9f7f7">

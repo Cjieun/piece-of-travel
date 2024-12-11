@@ -3,7 +3,6 @@ import {
   DetailContainer,
   AIDetailHeader,
   DetailHeaderText,
-  DetailMap,
   DetailSelectBox,
   DetailDateText,
   DetailFlatList,
@@ -40,7 +39,6 @@ export default function AIDetail() {
           </AIBackButton>
           <DetailHeaderText>{selectedTravel.title}</DetailHeaderText>
         </AIDetailHeader>
-        <DetailMap />
         <DetailSelectBox>
           <DaySelect day={selectedDay} isSelected={true} />
         </DetailSelectBox>

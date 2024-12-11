@@ -8,6 +8,7 @@ import {
   DetailFlatList,
   AIBackButton,
   DetailAIButtonPair,
+  DetailImage,
 } from './styles';
 import BackButton from '../../components/backButton/BackButton';
 import {useAIDetail} from './hooks';
@@ -39,6 +40,13 @@ export default function AIDetail() {
           </AIBackButton>
           <DetailHeaderText>{selectedTravel.title}</DetailHeaderText>
         </AIDetailHeader>
+        <DetailImage
+          source={
+            selectedTravel.thumbnail
+              ? {uri: travel.thumbnail}
+              : require('../../assets/images/example_image.png')
+          }
+        />
         <DetailSelectBox>
           <DaySelect day={selectedDay} isSelected={true} />
         </DetailSelectBox>

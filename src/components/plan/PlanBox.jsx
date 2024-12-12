@@ -138,7 +138,7 @@ export default function PlanBox({
           day={index}
           title={title}
           place={place}
-          memo={memo}
+          content={puzzles.content || ''}
           images={puzzles?.images || []}
         />
         {AI && feedback && <PlanBoxFeedback>{feedback}</PlanBoxFeedback>}

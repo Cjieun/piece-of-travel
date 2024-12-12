@@ -17,7 +17,7 @@ export default function PuzzleModal({
   day,
   title,
   place,
-  memo,
+  content,
   images = [],
 }) {
   return (
@@ -51,7 +51,7 @@ export default function PuzzleModal({
             />{' '}
             {place}
           </Place>
-          <Memo>{memo}</Memo>
+          <Memo>{content}</Memo>
         </Content>
       </Overlay>
     </Modal>

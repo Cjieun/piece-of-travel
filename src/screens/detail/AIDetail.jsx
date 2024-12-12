@@ -61,7 +61,7 @@ export default function AIDetail() {
               title={item.title}
               place={item.place}
               mapPlace={item.mapPlace}
-              memo={item.memo}
+              memo={item.content}
               isDone={item.isDone}
               puzzles={item.puzzles}
               AI={item.AI}

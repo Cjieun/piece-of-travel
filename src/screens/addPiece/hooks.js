@@ -61,10 +61,16 @@ export const useAddPiece = uploadedUrls => {
         return;
       }
 
-      selectedTravel.plans[dayIndex].items[itemIndex].puzzles = {
+      selectedTravel.plans[dayIndex].items[itemIndex].puzzle = {
         images: validUrls,
         content: content.trim(),
       };
+
+      if (!selectedTravel.pieces) {
+        selectedTravel.pieces = 1;
+      } else {
+        selectedTravel.pieces += 1;
+      }
 
       const updatedTravelData = [...travelData];
       updatedTravelData[travelIndex] = selectedTravel;

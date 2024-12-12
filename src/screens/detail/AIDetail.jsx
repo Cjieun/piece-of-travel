@@ -43,7 +43,7 @@ export default function AIDetail() {
         <DetailImage
           source={
             selectedTravel.thumbnail
-              ? {uri: travel.thumbnail}
+              ? {uri: selectedTravel.thumbnail}
               : require('../../assets/images/example_image.png')
           }
         />
@@ -61,7 +61,7 @@ export default function AIDetail() {
               title={item.title}
               place={item.place}
               mapPlace={item.mapPlace}
-              memo={item.content}
+              memo={item.memo}
               isDone={item.isDone}
               puzzles={item.puzzles}
               AI={item.AI}

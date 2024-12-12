@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import {uploadImage} from '../api/uploadImage';
+import {Alert} from 'react-native';
 
 export const useSelectImage = () => {
   const [images, setImages] = useState([null, null, null]);

@@ -135,10 +135,10 @@ export default function PlanBox({
         <PuzzleModal
           visible={modalVisible}
           onClose={closeModal}
-          day={index}
+          day={day}
           title={title}
           place={place}
-          content={puzzles.content || ''}
+          content={puzzles?.content || ''}
           images={puzzles?.images || []}
         />
         {AI && feedback && <PlanBoxFeedback>{feedback}</PlanBoxFeedback>}

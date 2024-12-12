@@ -102,7 +102,7 @@ export default function Detail() {
               mapPlace={item.mapPlace}
               memo={item.memo}
               isDone={item.isDone}
-              puzzles={item.puzzles}
+              puzzles={item.puzzle}
               AI={item.AI}
               day={selectedDay}
               travelId={travel.id}

@@ -77,7 +77,6 @@ export default function AddPlans() {
                   onChangeText={setPlace}
                 />
               </AddPlansInput>
-              <AddPlansMap />
             </AddPlansMapInput>
             <AddPlansInput>
               <Label>추가 메모</Label>
